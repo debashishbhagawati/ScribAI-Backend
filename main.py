@@ -13,10 +13,16 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+
+
+origins = [
+    "https://scribai-kappa.vercel.app",  # frontend origin
+    "http://localhost:3000",             # for local testing
+]
 # CORS setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -32,3 +38,7 @@ app.include_router(calculator_router, prefix="/calculate", tags=["calculate"])
 if __name__ == "__main__" and ENV == 'development':
     print(f"Starting server at {SERVER_URL}:{PORT} in {ENV} mode")
     uvicorn.run("main:app", host=SERVER_URL, port=PORT, reload=True)
+
+
+
+
