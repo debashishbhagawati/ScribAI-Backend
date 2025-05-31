@@ -1,10 +1,9 @@
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 
-
-
-SERVER_URL = 'localhost'
-PORT = 8000
-ENV = 'development'  # Options: 'development', 'production', 'testing'
+SERVER_URL = os.getenv('SERVER_URL', '0.0.0.0')  
+PORT = int(os.getenv('PORT', 8000))
+ENV = os.getenv('ENV', 'development')           
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
